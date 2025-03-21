@@ -127,6 +127,13 @@ Thêm mới SINH VIÊN
      <td><?php echo $row["MaNganh"]; ?></td>
     
      <td>
+
+
+    <!-- Nút Detail -->
+    <a href="detail.php?sid=<?php echo $row['MaSV'];?>" class="btn btn-info">
+        <i class="fas fa-info-circle"></i> Chi Tiết
+    </a>
+
      <a href="edit.php?sid=<?php echo $row['MaSV'];?>" class="btn btn-info">
      <i class="fas fa-edit"></i>
      Sửa</a> 
