@@ -64,9 +64,11 @@ $result = mysqli_query($connect, $query);
           echo 'Bạn chưa đăng nhập';
       }
       ?>
-       <div class="fixed-button">
+     
+     <div class="fixed-button">
    <a href="login.php" class="btn">Login</a>
    <a href="logout.php" class="btnn">Logout</a>
+   <a href="dangkihocphan.php" class="btnn">Danh sach hoc phan</a>
 
      </div>
 
@@ -95,8 +97,8 @@ Thêm mới SINH VIÊN
        <th  class="textt">Họ tên</th>
        <th class="textt">Phái</th>
        <th class="textt">Nơi Sinh</th>
-       <th class="textt">HInh</th>
-       <th class="textt">Ma nghanh</th>
+       <th class="textt">Hinh</th>
+       <th class="textt">MaNgahn</th>
        <th class="textt">Thao tác</th>
 
     </tr>
@@ -105,23 +107,26 @@ Thêm mới SINH VIÊN
     {
     ?>
     <tr>
-     <td><?php echo $row["MSV"]; ?></td>
+     <td><?php echo $row["MaSV"]; ?></td>
      <td><?php echo $row["HoTen"]; ?></td>
-     <td>
-                   <script type="text/javascript">
-       var gender = "<?php echo $row['GioiTinh']?>";
-       if(gender=='NAM'){
-         document.write('<img class="imgg"  width="100px" src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/335295080_1610840952716026_3643002734031296053_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=730e14&_nc_ohc=wEZKZ4Q95VYAX83Wsoc&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfB6W3kPGydQt3lKnbM046x2wm6xoYEHkBgYOjbjtbP6Ug&oe=640E7410" alt="Male"/>');
-       }else {
-         document.write('<img  class="imgg"  width="100px" src="https://www.freeiconspng.com/thumbs/female-icon/female-icon-13.png" alt="Female"/>');
-       }
-       </script>
-       </td>
-     <td><?php echo $row["NgaySinh"]; ?></td>
-     <td><?php echo $row["Hinh"]; ?></td>
-     <td><?php echo $row["MaNghanh"]; ?></td>
-     <td>
+     <td><?php echo $row["GioiTinh"]; ?></td>
     
+     <td><?php echo $row["NgaySinh"]; ?></td>
+
+
+     <td>
+    <a href="<?php echo $row['Hinh']; ?>" target="_blank">
+        <img class="imgg" width="100px" src="<?php echo $row['Hinh']; ?>" alt="Image"/>
+    </a>
+</td>
+
+
+
+
+
+     <td><?php echo $row["MaNganh"]; ?></td>
+    
+     <td>
      <a href="edit.php?sid=<?php echo $row['MaSV'];?>" class="btn btn-info">
      <i class="fas fa-edit"></i>
      Sửa</a> 
@@ -148,52 +153,51 @@ Thêm mới SINH VIÊN
  </div>
  
 
-<div class="modal" id="myModal">
- <div class="modal-dialog">
-   <div class="modal-content">
+ <div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Form thêm SINH VIÊN</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
 
-     <div class="modal-header">
-       <h4 class="modal-title">Form thêm SINH VIÊN</h4>
-       <button type="button" class="close" data-dismiss="modal">&times;</button>
-     </div>
+            <div class="modal-body">
+                <form action="themsv.php" method="post">
+                    <div class="form-group">
+                        <label for="MaSV">Mã SINH VIÊN</label>
+                        <input type="text" id="MaSV" class="form-control" name="MaSV" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="HoTen">Họ Tên SINH VIÊN</label>
+                        <input type="text" name="HoTen" id="HoTen" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="GioiTinh">Phái</label>
+                        <input type="text" id="GioiTinh" name="GioiTinh" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="NgaySinh">Nơi Sinh</label>
+                        <input type="text" id="NgaySinh" name="NgaySinh" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Hinh">Hình</label>
+                        <input type="text" id="Hinh" name="Hinh" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+    <label for="MaNganh">Mã Ngành</label>
+    <input type="text" name="MaNganh" id="MaNganh" class="form-control" required>
+</div>
 
-     <!-- Modal body -->
-     <div class="modal-body">
-     <form action="them.php" method="post">
-           <div class="form-group">
-               <label for="MaSV">Mã SINH VIÊN</label>
-               <input type="text" id="MaSV" class="form-control" name="MaSV">
-           </div>
-           <div class="form-group">
-               <label for="HoTen">Họ Tên SINH VIÊN</label>
-               <input type="text" name="HoTen" id="HoTen" class="form-control">
-           </div>
-           <div class="form-group">
-               <label for="GioiTinh">Phái</label>
-               <input type="text" id="GioiTinh" name="GioiTinh" class="form-control">
-           </div>
-           <div class="form-group">
-               <label for="NgaySinh">Nơi Sinh</label>
-               <input type="text" id="NgaySinh" name="NgaySinh" class="form-control">
-           </div>
-           <div class="form-group">
-               <label for="Hinh">Hinh</label>
-               <input type="text" id="Hinh" name="Hinh" class="form-control">
-           </div>
-           <div class="form-group">
-               <label for="MaNghanh">Lương</label>
-               <input type="text" id="MaNghanh" name="MaNghanh" class="form-control">
-           </div>
-         
-          
-           <button class="btn btn-success">Thêm SINH VIÊN</button>
-       </form>
-     </div>
+                    <button class="btn btn-success">Thêm SINH VIÊN</button>
+                </form>
+            </div>
 
-  
-     <div class="modal-footer">
-       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-     </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
    </div>
  </div>
